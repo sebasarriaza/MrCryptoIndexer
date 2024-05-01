@@ -11,21 +11,21 @@
   ],
   "packageManager": "pnpm@8.10.2",
   "scripts": {
-    "start": "pnpm build && node dist/server",
+    "start": "pnpm run build && node dist/server",
     "clean": "git clean -xdf dist",
     "clean:node": "git clean -xdf node_modules",
     "metadata:codegen": "pnpm ts-node src/indexer/metadata/script.ts",
     "lint": "tsc --noEmit --pretty",
     "format": "prettier --check .",
     "format:fix": "prettier --write .",
-    "build": "npm -s run db:generate && tsup && npm run build:schema",
+    "build": "pnpm run db:generate && tsup && pnpm run build:schema",
     "build:schema": "ts-node -r tsconfig-paths/register src/schema/index.ts",
     "db:generate": "prisma generate",
     "db:push": "prisma db push",
     "db:studio": "prisma studio",
     "db:seed": "prisma db seed",
     "db:reset": "prisma db push --force-reset"
-  },
+  },  
   "prisma": {
     "seed": "ts-node --transpile-only prisma/seed.ts"
   },
