@@ -166,6 +166,8 @@ enum Headwear {
 type Holder {
   address: String!
   bankingPercentage: Float!
+  holderRanking: Int!
+  holderScore: BigInt!
   mrCryptosOwned(first: Int! = 100, order: MrCryptoOrderBy! = {by: tokenId, type: desc}, skip: Int! = 0): [MrCrypto!]!
   numberOfMrCryptos: Int!
 }
