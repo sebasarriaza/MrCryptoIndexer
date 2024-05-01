@@ -6,10 +6,12 @@ COPY . /app
 WORKDIR /app
 
 FROM base AS prod-deps
-RUN --mount=type=cache,target=/pnpm/store pnpm install --frozen-lockfile
+# Asegúrate de definir un ID único y descriptivo para el montaje de caché
+RUN --mount=type=cache,id=pnpm-store,target=/pnpm/store pnpm install --frozen-lockfile
 
 FROM base AS build
-RUN --mount=type=cache,target=/pnpm/store pnpm install --frozen-lockfile
+# Utiliza el mismo ID para la caché en el ambiente de construcción
+RUN --mount=type=cache,id=pnpm-store,target=/pnpm/store pnpm install --frozen-lockfile
 RUN pnpm run build
 
 FROM base
